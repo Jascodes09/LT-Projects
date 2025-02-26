@@ -47,5 +47,7 @@ This repository is intended for educational purposes. Please ensure proper attri
 
 ---
 🔗 **Stay Connected:**
+
 [![LinkedIn](https://img.shields.io/badge/-LinkedIn-blue?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/jasmin1105)
+
 [![Email](https://img.shields.io/badge/-Email-D14836?style=flat&logo=Gmail&logoColor=white)](mailto:shaikjasmine1105@gmail.com)
