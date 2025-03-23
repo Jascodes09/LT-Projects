@@ -1,0 +1,145 @@
+-- Create Database
+ CREATEDATABASELibraryManagement1;
+-- Use the database
+ USELibraryManagement1;
+
+-- Create roles table (needed forpermission and login)
+ CREATETABLEroles(
+ rol_id INT PRIMARY KEY,
+ rol_name VARCHAR(15),
+ rol_lvl VARCHAR(15)
+ );
+
+-- Create branchtable
+ CREATETABLEbranch(
+ brn_id INT PRIMARYKEY,
+ brn_nameVARCHAR(20),
+ brn_ctg VARCHAR(20)
+ );
+
+-- Create books table
+ CREATETABLEbooks(
+ book_id INT PRIMARYKEY,
+ book_nameVARCHAR(30),
+ athr_name VARCHAR(30),
+ book_brn_id INT,
+ book_price INT,
+ FOREIGNKEY(book_brn_id)
+ REFERENCESbranch(brn_id)
+ );
+
+-- Create student table (needed for issues)
+ CREATETABLEstudent (
+ stu_id INTPRIMARYKEY,
+ stu_nameVARCHAR(30),
+ stu_ph_no VARCHAR(15),
+
+-- Changed fromINT toVARCHAR
+ stu_email VARCHAR(30),
+ stu_dob DATE
+ );
+
+-- Create issues table
+ CREATETABLEissues(
+ isu_id INTPRIMARY KEY,
+ isu_date DATE,
+ isu_book_id INT,
+ isu_stu_id INT,
+FOREIGNKEY(isu_book_id) 
+REFERENCESbooks(book_id),
+ FOREIGNKEY(isu_stu_id) 
+REFERENCES student(stu_id)
+ );
+
+-- Create permission table
+ CREATETABLEpermission (
+ pr_id INTPRIMARYKEY,
+ pr_name VARCHAR(15),
+ pr_rol_id INT,
+ FOREIGNKEY(pr_rol_id) 
+REFERENCES roles(rol_id)
+ );
+
+-- Create login table
+ CREATETABLE login(
+ lgn_id INT PRIMARY KEY,
+ lgn_usr_id INT,
+ lgn_usr_name VARCHAR(20),
+ lgn_passz VARCHAR(18),
+ lgn_role_id INT,
+ FOREIGNKEY(lgn_role_id)
+ REFERENCESroles(rol_id)
+ );
+
+-- Create usertable
+ CREATETABLE user(
+ usr_id INTPRIMARYKEY,
+ usr_nameVARCHAR(30),
+ usr_ph_no VARCHAR(15),
+
+-- Changed from INT toVARCHAR
+ usr_email VARCHAR(30)
+ );
+
+-- Insert into branch
+ INSERTINTObranch VALUES(1, 'Central Library', 'Public');
+ INSERTINTObranch VALUES(2, 'Engineering Library', 'Private');
+ INSERTINTObranch VALUES(3, 'Medical Library', 'Private');
+
+-- Insert into books
+ INSERTINTObooksVALUES(1, 'Database Systems', 'Navathe', 1,600);
+ INSERTINTObooksVALUES(2, 'OperatingSystems', 'Silberschatz', 2,700);
+ INSERTINTObooksVALUES(3, 'AIBasics', 'Russell', 1, 800);
+
+-- Insert into student
+ INSERTINTOstudent VALUES(1, 'John Doe', '1234567890', 'john@example.com',
+ '2000-05-20');
+INSERTINTOstudent VALUES(2, 'Jane Smith', '9876543210', 'jane@example.com',
+ '2001-03-15');
+ INSERTINTOstudent VALUES(3, 'SamWilson', '4567891230', 'sam@example.com',
+ '1999-11-30');
+
+-- Insert into issues
+ INSERTINTOissuesVALUES(1, '2024-11-01',1, 1);
+ INSERTINTOissuesVALUES(2, '2024-11-02',2, 2);
+ INSERTINTOissuesVALUES(3, '2024-11-03',3, 3);
+
+-- Insert into roles
+ INSERTINTOroles VALUES(1, 'Admin', 'High');
+ INSERTINTOroles VALUES(2, 'Librarian', 'Medium');
+ INSERTINTOroles VALUES(3, 'Assistant', 'Low');
+
+-- Insert into permission
+ INSERTINTOpermission VALUES (1, 'AddBook',1);
+ INSERTINTOpermission VALUES (2, 'IssueBook',2);
+ INSERTINTOpermission VALUES (3, 'ViewRecords',3);
+
+-- Insert into login
+ INSERTINTOlogin VALUES(1,1, 'admin01', 'pass123', 1);
+ INSERTINTOlogin VALUES(2,2, 'librarian01', 'pass456', 2);
+ INSERTINTOlogin VALUES(3,3, 'assistant01', 'pass789',3);
+
+-- Insert into user
+ INSERTINTOuserVALUES(1, 'Alice', '1234509876', 'alice@example.com');
+ INSERTINTOuserVALUES(2, 'Bob', '9876541230', 'bob@example.com');
+ INSERTINTOuserVALUES(3, 'Charlie', '4561237890', 'charlie@example.com');
+
+-- DESCcommands
+ DESCbranch;
+ DESCbooks;
+ DESCstudent;
+ DESCissues;
+ DESCroles;
+ DESCpermission;
+ DESClogin;
+ DESCuser;
+
+-- SELECTcommands
+ SELECT*FROMbranch;
+ SELECT*FROMbooks;
+SELECT*FROMstudent;
+ SELECT*FROMissues;
+ SELECT*FROMroles;
+ SELECT*FROMpermission;
+ SELECT*FROMlogin;
+ SELECT*FROMuser
